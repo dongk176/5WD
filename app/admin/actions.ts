@@ -1,6 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { ADMIN_COOKIE_NAME, verifyAdminSessionToken } from "@/lib/admin-auth";
 import { prisma } from "@/lib/db";
 import { isDirectAssetUrl, uploadFileAsset } from "@/lib/storage";
 import { isYouTubeUrl } from "@/lib/video-utils";
@@ -52,6 +54,14 @@ function clampSortOrder(input: number | null, max: number, fallback: number): nu
   const value = input ?? fallback;
   if (max <= 0) return 1;
   return Math.min(Math.max(value, 1), max);
+}
+
+async function requireAdminSession() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
+  if (!verifyAdminSessionToken(token)) {
+    throw new Error("관리자 인증이 필요합니다.");
+  }
 }
 
 async function normalizeDiscographyReleaseOrders() {
@@ -154,6 +164,7 @@ async function pickAsset(input: {
 }
 
 export async function createTourEvent(formData: FormData) {
+  await requireAdminSession();
   const date = getStringField(formData, "eventDate");
   const eventName = getStringField(formData, "eventName");
   const time = getStringField(formData, "eventTime");
@@ -181,6 +192,7 @@ export async function createTourEvent(formData: FormData) {
 }
 
 export async function updateTourEvent(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   const date = getStringField(formData, "eventDate");
   const eventName = getStringField(formData, "eventName");
@@ -210,6 +222,7 @@ export async function updateTourEvent(formData: FormData) {
 }
 
 export async function deleteTourEvent(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   if (!id) return;
 
@@ -219,6 +232,7 @@ export async function deleteTourEvent(formData: FormData) {
 }
 
 export async function createDiscographyRelease(formData: FormData) {
+  await requireAdminSession();
   const title = getStringField(formData, "title");
   const albumType = getAlbumType(getStringField(formData, "albumType"));
   const releaseYear = Number(getStringField(formData, "releaseYear"));
@@ -264,6 +278,7 @@ export async function createDiscographyRelease(formData: FormData) {
 }
 
 export async function updateDiscographyRelease(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   const title = getStringField(formData, "title");
   const albumType = getAlbumType(getStringField(formData, "albumType"));
@@ -336,6 +351,7 @@ export async function updateDiscographyRelease(formData: FormData) {
 }
 
 export async function deleteDiscographyRelease(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   if (!id) return;
 
@@ -359,6 +375,7 @@ export async function deleteDiscographyRelease(formData: FormData) {
 }
 
 export async function createDiscographyVideo(formData: FormData) {
+  await requireAdminSession();
   const title = getStringField(formData, "title");
   const videoUrl = getStringField(formData, "videoUrl");
   const requestedSortOrder = getRequestedSortOrder(formData, "sortOrder");
@@ -403,6 +420,7 @@ export async function createDiscographyVideo(formData: FormData) {
 }
 
 export async function updateDiscographyVideo(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   const title = getStringField(formData, "title");
   const videoUrl = getStringField(formData, "videoUrl");
@@ -484,6 +502,7 @@ export async function updateDiscographyVideo(formData: FormData) {
 }
 
 export async function deleteDiscographyVideo(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   if (!id) return;
 
@@ -507,6 +526,7 @@ export async function deleteDiscographyVideo(formData: FormData) {
 }
 
 export async function createGalleryPhoto(formData: FormData) {
+  await requireAdminSession();
   const caption = getStringField(formData, "caption");
   const requestedSortOrder = getRequestedSortOrder(formData, "sortOrder");
 
@@ -541,6 +561,7 @@ export async function createGalleryPhoto(formData: FormData) {
 }
 
 export async function updateGalleryPhoto(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   const caption = getStringField(formData, "caption");
   const requestedSortOrder = getRequestedSortOrder(formData, "sortOrder");
@@ -604,6 +625,7 @@ export async function updateGalleryPhoto(formData: FormData) {
 }
 
 export async function deleteGalleryPhoto(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   if (!id) return;
 
@@ -627,6 +649,7 @@ export async function deleteGalleryPhoto(formData: FormData) {
 }
 
 export async function updateTeamHero(formData: FormData) {
+  await requireAdminSession();
   const currentHeroAsset = getStringField(formData, "currentHeroAsset");
   const heroAsset = await pickAsset({
     formData,
@@ -653,6 +676,7 @@ export async function updateTeamHero(formData: FormData) {
 }
 
 export async function createTeamMember(formData: FormData) {
+  await requireAdminSession();
   await normalizeTeamMemberOrders();
   const count = await prisma.teamMember.count();
   if (count >= 6) {
@@ -701,6 +725,7 @@ export async function createTeamMember(formData: FormData) {
 }
 
 export async function updateTeamMember(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   const name = getStringField(formData, "name");
   const part = getStringField(formData, "part");
@@ -773,6 +798,7 @@ export async function updateTeamMember(formData: FormData) {
 }
 
 export async function deleteTeamMember(formData: FormData) {
+  await requireAdminSession();
   const id = getStringField(formData, "id");
   if (!id) return;
 

@@ -1,7 +1,11 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import AdminLogoutButton from "@/components/AdminLogoutButton";
 import AdminFileInput from "@/components/AdminFileInput";
 import FormConfirmGuard from "@/components/FormConfirmGuard";
 import SiteHeader from "@/components/SiteHeader";
 import YouTubeThumbnailWithFallback from "@/components/YouTubeThumbnailWithFallback";
+import { ADMIN_COOKIE_NAME, verifyAdminSessionToken } from "@/lib/admin-auth";
 import { prisma } from "@/lib/db";
 import { resolveAssetUrl } from "@/lib/storage";
 import { getYouTubeEmbedUrl, getYouTubeThumbnailCandidates } from "@/lib/video-utils";
@@ -52,6 +56,12 @@ function getAssetFileName(asset: string | null | undefined): string {
 }
 
 export default async function AdminPage() {
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
+  if (!verifyAdminSessionToken(sessionToken)) {
+    redirect("/admin/login");
+  }
+
   const [tourEvents, releasesRaw, videosRaw, photosRaw, inquiries, teamConfig, teamMembersRaw] = await Promise.all([
     prisma.tourEvent.findMany({
       orderBy: [{ eventDate: "asc" }, { createdAt: "asc" }],
@@ -124,7 +134,10 @@ export default async function AdminPage() {
       <SiteHeader />
 
       <main className="mx-auto max-w-7xl px-6 pt-28 pb-20">
-        <h1 className="mb-10 text-4xl font-bold tracking-tight">Admin</h1>
+        <div className="mb-10 flex items-center justify-between gap-4">
+          <h1 className="text-4xl font-bold tracking-tight">Admin</h1>
+          <AdminLogoutButton />
+        </div>
 
         <section className="mb-16 rounded-xl border border-slate-200 bg-white p-6 md:p-8">
           <h2 className="mb-6 text-2xl font-bold">공연 일정 등록</h2>
