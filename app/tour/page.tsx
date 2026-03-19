@@ -2,7 +2,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { prisma } from "@/lib/db";
 import { socialLinks } from "@/lib/social-links";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 600;
 
 function formatDate(date: Date): string {
   const month = date.getMonth() + 1;

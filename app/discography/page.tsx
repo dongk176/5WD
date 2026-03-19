@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db";
 import { resolveAssetUrl } from "@/lib/storage";
 import { socialLinks } from "@/lib/social-links";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 600;
 
 function albumTypeLabel(type: string): string {
   if (type === "EP") return "EP";

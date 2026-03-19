@@ -7,7 +7,7 @@ import { socialLinks } from "@/lib/social-links";
 import { resolveAssetUrl } from "@/lib/storage";
 import { submitContactInquiry } from "./contact/actions";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 600;
 
 function formatTourDate(date: Date): string {
   const month = date.getMonth() + 1;

@@ -5,7 +5,7 @@ import { resolveAssetUrl } from "@/lib/storage";
 import { socialLinks } from "@/lib/social-links";
 import { getYouTubeEmbedUrl, getYouTubeThumbnailCandidates } from "@/lib/video-utils";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 600;
 
 export default async function VideoPage() {
   const videosRaw = await prisma.discographyVideo.findMany({

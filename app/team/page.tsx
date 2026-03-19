@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db";
 import { socialLinks } from "@/lib/social-links";
 import { resolveAssetUrl } from "@/lib/storage";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 600;
 
 export default async function TeamPage() {
   const [teamConfig, membersRaw] = await Promise.all([
