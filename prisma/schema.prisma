@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  schemas   = ["5WD"]
+}
+
+enum AlbumType {
+  FULL_ALBUM
+  EP
+  SINGLE
+
+  @@schema("5WD")
+}
+
+model TourEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  eventDate DateTime @db.Date @map("event_date")
+  eventName String   @default("") @map("event_name")
+  eventTime String   @map("event_time")
+  location  String
+  ticketUrl String?  @map("ticket_url")
+  isSoldOut Boolean  @default(false) @map("is_sold_out")
+  createdAt DateTime @default(now()) @db.Timestamptz(6) @map("created_at")
+  updatedAt DateTime @updatedAt @db.Timestamptz(6) @map("updated_at")
+
+  @@map("tour_events")
+  @@schema("5WD")
+}
+
+model DiscographyRelease {
+  id           String    @id @default(uuid()) @db.Uuid
+  title        String
+  albumType    AlbumType @map("album_type")
+  sortOrder    Int       @default(0) @map("sort_order")
+  releaseYear  Int       @map("release_year")
+  coverAsset   String    @map("cover_asset")
+  streamingUrl String    @map("streaming_url")
+  videoTitle   String?   @map("video_title")
+  videoAsset   String?   @map("video_asset")
+  createdAt    DateTime  @default(now()) @db.Timestamptz(6) @map("created_at")
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(6) @map("updated_at")
+
+  @@map("discography_releases")
+  @@schema("5WD")
+}
+
+model GalleryPhoto {
+  id         String   @id @default(uuid()) @db.Uuid
+  photoAsset String   @map("photo_asset")
+  caption    String?
+  sortOrder  Int      @default(0) @map("sort_order")
+  createdAt  DateTime @default(now()) @db.Timestamptz(6) @map("created_at")
+  updatedAt  DateTime @updatedAt @db.Timestamptz(6) @map("updated_at")
+
+  @@map("gallery_photos")
+  @@schema("5WD")
+}
+
+model ContactInquiry {
+  id          String   @id @default(uuid()) @db.Uuid
+  nameCompany String   @map("name_company")
+  email       String
+  message     String
+  createdAt   DateTime @default(now()) @db.Timestamptz(6) @map("created_at")
+
+  @@map("contact_inquiries")
+  @@schema("5WD")
+}
+
+model DiscographyVideo {
+  id             String   @id @default(uuid()) @db.Uuid
+  title          String
+  sortOrder      Int      @default(0) @map("sort_order")
+  videoAsset     String   @map("video_asset")
+  thumbnailAsset String?  @map("thumbnail_asset")
+  createdAt      DateTime @default(now()) @db.Timestamptz(6) @map("created_at")
+  updatedAt      DateTime @updatedAt @db.Timestamptz(6) @map("updated_at")
+
+  @@map("discography_videos")
+  @@schema("5WD")
+}
+
+model TeamConfig {
+  id        Int      @id
+  heroAsset String?  @map("hero_asset")
+  createdAt DateTime @default(now()) @db.Timestamptz(6) @map("created_at")
+  updatedAt DateTime @updatedAt @db.Timestamptz(6) @map("updated_at")
+
+  @@map("team_config")
+  @@schema("5WD")
+}
+
+model TeamMember {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  part        String
+  description String?
+  profileUrl  String?  @map("profile_url")
+  photoAsset  String   @map("photo_asset")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @db.Timestamptz(6) @map("created_at")
+  updatedAt   DateTime @updatedAt @db.Timestamptz(6) @map("updated_at")
+
+  @@map("team_members")
+  @@schema("5WD")
+}
