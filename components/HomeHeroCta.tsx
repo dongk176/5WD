@@ -21,7 +21,7 @@ export default function HomeHeroCta() {
 
   return (
     <>
-      <div className="absolute bottom-8 left-1/2 z-20 flex w-[calc(100%-3rem)] max-w-sm -translate-x-1/2 flex-col items-center gap-3 md:bottom-28 md:w-auto md:max-w-none md:flex-row">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+1.25rem)] left-1/2 z-20 flex w-[calc(100%-3rem)] max-w-sm -translate-x-1/2 flex-col items-center gap-3 md:bottom-28 md:w-auto md:max-w-none md:flex-row">
         <button
           type="button"
           onClick={() => setOpen(true)}

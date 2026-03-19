@@ -54,7 +54,7 @@ export default async function Home() {
     <div className="bg-background-light text-charcoal selection:bg-charcoal selection:text-white">
       <SiteHeader logoAnimation="roll-in" />
 
-      <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-white">
+      <section className="relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white md:h-screen">
         <div className="absolute inset-0 z-10 bg-white/20" />
         <div
           className="absolute inset-0 bg-cover bg-center opacity-90 md:hidden"
