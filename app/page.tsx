@@ -1,4 +1,5 @@
 import HomeHeroCta from "@/components/HomeHeroCta";
+import HomeHeroHeightLock from "@/components/HomeHeroHeightLock";
 import SiteHeader from "@/components/SiteHeader";
 import { prisma } from "@/lib/db";
 import { socialLinks } from "@/lib/social-links";
@@ -54,7 +55,11 @@ export default async function Home() {
     <div className="bg-background-light text-charcoal selection:bg-charcoal selection:text-white">
       <SiteHeader logoAnimation="roll-in" />
 
-      <section className="relative flex h-[100svh] min-h-[100svh] w-full items-center justify-center overflow-hidden bg-white md:h-screen md:min-h-screen">
+      <section
+        id="home-hero"
+        className="relative flex h-[var(--home-hero-height,clamp(720px,78vh,820px))] min-h-[var(--home-hero-height,clamp(720px,78vh,820px))] w-full items-center justify-center overflow-hidden bg-white md:h-screen md:min-h-screen"
+      >
+        <HomeHeroHeightLock />
         <div className="absolute inset-0 z-10 bg-white/20" />
         <img
           src="/home/main-mobile.png"
