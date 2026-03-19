@@ -4,6 +4,8 @@ import { prisma } from "@/lib/db";
 import { resolveAssetUrl } from "@/lib/storage";
 import { socialLinks } from "@/lib/social-links";
 
+export const dynamic = "force-dynamic";
+
 export default async function GalleryPage() {
   const galleryRaw = await prisma.galleryPhoto.findMany({
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],

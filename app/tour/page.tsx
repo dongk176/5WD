@@ -2,6 +2,8 @@ import SiteHeader from "@/components/SiteHeader";
 import { prisma } from "@/lib/db";
 import { socialLinks } from "@/lib/social-links";
 
+export const dynamic = "force-dynamic";
+
 function formatDate(date: Date): string {
   const month = date.getMonth() + 1;
   const day = String(date.getDate()).padStart(2, "0");

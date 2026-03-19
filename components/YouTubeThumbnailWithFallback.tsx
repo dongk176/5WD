@@ -68,7 +68,9 @@ export default function YouTubeThumbnailWithFallback({
       onLoad={(event) => {
         const width = event.currentTarget.naturalWidth;
         const height = event.currentTarget.naturalHeight;
-        if (width <= 120 && height <= 90) {
+        const isLikelyPlaceholder = width <= 120 && height <= 90;
+        const isLowResMaxres = current.includes("maxresdefault") && width <= 320;
+        if (isLikelyPlaceholder || isLowResMaxres) {
           moveToNext();
         }
       }}

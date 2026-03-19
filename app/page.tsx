@@ -5,6 +5,8 @@ import { socialLinks } from "@/lib/social-links";
 import { resolveAssetUrl } from "@/lib/storage";
 import { submitContactInquiry } from "./contact/actions";
 
+export const dynamic = "force-dynamic";
+
 function formatTourDate(date: Date): string {
   const month = date.getMonth() + 1;
   const day = String(date.getDate()).padStart(2, "0");

@@ -3,6 +3,8 @@ import { prisma } from "@/lib/db";
 import { socialLinks } from "@/lib/social-links";
 import { resolveAssetUrl } from "@/lib/storage";
 
+export const dynamic = "force-dynamic";
+
 export default async function TeamPage() {
   const [teamConfig, membersRaw] = await Promise.all([
     prisma.teamConfig.findUnique({ where: { id: 1 } }),

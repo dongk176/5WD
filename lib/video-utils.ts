@@ -58,11 +58,11 @@ export function getYouTubeThumbnailCandidates(url: string | null | undefined): s
   const id = getYouTubeId(url);
   if (!id) return [];
   return [
-    `https://i.ytimg.com/vi_webp/${id}/maxresdefault.webp`,
+    `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    `https://i.ytimg.com/vi/${id}/sddefault.jpg`,
+    `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
     `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
     `https://i.ytimg.com/vi_webp/${id}/sddefault.webp`,
-    `https://i.ytimg.com/vi/${id}/sddefault.jpg`,
-    `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-    `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
+    `https://i.ytimg.com/vi_webp/${id}/maxresdefault.webp`,
   ];
 }
