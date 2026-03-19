@@ -18,24 +18,24 @@ export default async function ContactPage(props: ContactPageProps) {
         <section className="py-16 md:py-24">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
             <div>
-              <h1 className="mb-10 text-5xl font-bold tracking-tight uppercase md:text-6xl">Contact</h1>
+              <h1 className="page-reveal page-delay-1 mb-10 text-5xl font-bold tracking-tight uppercase md:text-6xl">Contact</h1>
 
               <div className="space-y-10">
-                <div>
+                <div className="page-reveal page-delay-2">
                   <div>
                     <p className="mb-1 text-xs font-bold tracking-widest text-slate-400 uppercase">이메일</p>
                     <p className="text-xl font-bold tracking-tighter md:text-2xl">band5wheeldrive@gmail.com</p>
                   </div>
                 </div>
 
-                <div>
+                <div className="page-reveal page-delay-3">
                   <div>
                     <p className="mb-1 text-xs font-bold tracking-widest text-slate-400 uppercase">전화번호</p>
                     <p className="text-xl font-bold tracking-tighter md:text-2xl">010-3581-8879</p>
                   </div>
                 </div>
 
-                <div>
+                <div className="page-reveal page-delay-4">
                   <p className="mb-4 text-xs font-bold tracking-widest text-slate-400 uppercase">SNS</p>
                   <div className="overflow-x-auto pb-1">
                     <div className="flex min-w-max flex-nowrap items-center gap-6">
@@ -57,7 +57,7 @@ export default async function ContactPage(props: ContactPageProps) {
               </div>
             </div>
 
-            <div className="border border-slate-200 bg-white p-8 md:p-12">
+            <div className="page-reveal page-delay-2 border border-slate-200 bg-white p-8 md:p-12">
               {isSent && (
                 <p className="mb-6 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
                   문의가 정상적으로 접수되었습니다.

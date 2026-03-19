@@ -25,10 +25,10 @@ export default async function GalleryPage() {
       <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 pt-28 pb-12 lg:px-20">
         <div className="mx-auto w-full max-w-[1120px]">
           <div className="mb-16">
-            <h2 className="text-5xl font-light tracking-tight">Gallery</h2>
+            <h2 className="page-reveal page-delay-1 text-5xl font-light tracking-tight">Gallery</h2>
           </div>
 
-          <GalleryPhotoGrid items={galleryItems} />
+          <GalleryPhotoGrid items={galleryItems} revealStartDelay={180} />
         </div>
       </main>
 

@@ -10,9 +10,10 @@ type GalleryItem = {
 
 type GalleryPhotoGridProps = {
   items: GalleryItem[];
+  revealStartDelay?: number;
 };
 
-export default function GalleryPhotoGrid({ items }: GalleryPhotoGridProps) {
+export default function GalleryPhotoGrid({ items, revealStartDelay = 180 }: GalleryPhotoGridProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const activeItem = useMemo(() => {
@@ -24,7 +25,11 @@ export default function GalleryPhotoGrid({ items }: GalleryPhotoGridProps) {
     <>
       <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {items.map((item, index) => (
-          <div key={item.id} className="group cursor-zoom-in">
+          <div
+            key={item.id}
+            className="page-reveal group cursor-zoom-in"
+            style={{ animationDelay: `${revealStartDelay + index * 45}ms` }}
+          >
             <div className="relative mb-4 aspect-square overflow-hidden bg-slate-100">
               {item.photoUrl ? (
                 <button type="button" onClick={() => setActiveIndex(index)} className="h-full w-full">

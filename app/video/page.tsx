@@ -29,19 +29,20 @@ export default async function VideoPage() {
       <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 pt-28 pb-12 lg:px-20">
         <div className="mx-auto w-full max-w-[1120px]">
           <div className="mb-16 space-y-4">
-            <h2 className="text-5xl font-light tracking-tight">Video</h2>
+            <h2 className="page-reveal page-delay-1 text-5xl font-light tracking-tight">Video</h2>
           </div>
 
           <div className="flex flex-col gap-14">
-            {videos.map((video) => (
-              <DiscographyVideoCard
-                key={video.id}
-                title={video.title}
-                embedUrl={video.embedUrl}
-                videoUrl={video.videoUrl}
-                thumbnailUrl={video.thumbnailUrl || video.youtubeThumbCandidates[0] || null}
-                thumbnailCandidates={video.youtubeThumbCandidates}
-              />
+            {videos.map((video, index) => (
+              <div key={video.id} className="page-reveal" style={{ animationDelay: `${180 + index * 70}ms` }}>
+                <DiscographyVideoCard
+                  title={video.title}
+                  embedUrl={video.embedUrl}
+                  videoUrl={video.videoUrl}
+                  thumbnailUrl={video.thumbnailUrl || video.youtubeThumbCandidates[0] || null}
+                  thumbnailCandidates={video.youtubeThumbCandidates}
+                />
+              </div>
             ))}
             {videos.length === 0 && <p className="text-center text-sm text-slate-400">등록된 영상이 없습니다.</p>}
           </div>

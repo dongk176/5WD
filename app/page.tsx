@@ -1,5 +1,6 @@
 import HomeHeroCta from "@/components/HomeHeroCta";
-import HomeHeroHeightLock from "@/components/HomeHeroHeightLock";
+import HomeHeroViewportLock from "@/components/HomeHeroViewportLock";
+import HomeScrollReveal from "@/components/HomeScrollReveal";
 import SiteHeader from "@/components/SiteHeader";
 import { prisma } from "@/lib/db";
 import { socialLinks } from "@/lib/social-links";
@@ -53,28 +54,22 @@ export default async function Home() {
 
   return (
     <div className="bg-background-light text-charcoal selection:bg-charcoal selection:text-white">
+      <HomeScrollReveal />
       <SiteHeader logoAnimation="roll-in" />
 
-      <section
-        id="home-hero"
-        className="relative flex h-[var(--home-hero-height,clamp(720px,78vh,820px))] min-h-[var(--home-hero-height,clamp(720px,78vh,820px))] w-full items-center justify-center overflow-hidden bg-white md:h-screen md:min-h-screen"
-      >
-        <HomeHeroHeightLock />
+      <section className="relative flex h-[var(--home-hero-lock,clamp(640px,100svh,820px))] min-h-[var(--home-hero-lock,clamp(640px,100svh,820px))] w-full items-center justify-center overflow-hidden bg-slate-100 md:h-screen md:min-h-screen">
+        <HomeHeroViewportLock />
         <div className="absolute inset-0 z-10 bg-white/20" />
-        <img
-          src="/home/main-mobile.png"
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[center_44%] opacity-90 md:hidden"
-        />
-        <img
-          src="/home/main.png"
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          className="pointer-events-none absolute inset-0 hidden h-full w-full select-none object-cover object-[center_44%] opacity-90 md:block"
-        />
+        <picture className="pointer-events-none absolute inset-0">
+          <source media="(min-width: 768px)" srcSet="/home/main.png" />
+          <img
+            src="/home/main-mobile.png"
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            className="hero-media-cinematic absolute inset-0 h-full w-full select-none object-cover object-[center_44%]"
+          />
+        </picture>
         <HomeHeroCta />
         <div className="absolute bottom-3 left-1/2 z-20 hidden -translate-x-1/2 animate-bounce md:bottom-10 md:block">
           <svg

@@ -27,11 +27,11 @@ export default async function TourPage() {
       <main className="flex-grow pt-24">
         <section className="mx-auto max-w-6xl px-6 pt-20 pb-12">
           <div className="max-w-3xl">
-            <h2 className="mb-6 text-5xl font-black tracking-tight md:text-7xl">Tour</h2>
+            <h2 className="page-reveal page-delay-1 mb-6 text-5xl font-black tracking-tight md:text-7xl">Tour</h2>
           </div>
         </section>
 
-        <section className="mx-auto mb-8 max-w-6xl px-6">
+        <section className="page-reveal page-delay-2 mx-auto mb-8 max-w-6xl px-6">
           <div className="flex gap-8 border-b border-slate-200">
             <button className="border-b-2 border-primary pb-4 text-sm font-bold tracking-widest uppercase" type="button">
               Upcoming Dates
@@ -41,10 +41,11 @@ export default async function TourPage() {
 
         <section className="mx-auto max-w-6xl px-6 pb-32">
           <div className="space-y-0 md:hidden">
-            {tourRows.map((row) => (
+            {tourRows.map((row, index) => (
               <div
                 key={row.id}
-                className="group flex flex-col items-start justify-between border-b border-slate-100 px-4 py-10 transition-colors hover:bg-slate-50"
+                className="page-reveal group flex flex-col items-start justify-between border-b border-slate-100 px-4 py-10 transition-colors hover:bg-slate-50"
+                style={{ animationDelay: `${220 + index * 45}ms` }}
               >
                 <div className="mb-4 flex flex-col gap-1">
                   <span className="text-xs tracking-widest text-slate-400 uppercase">{formatDate(row.eventDate)}</span>
@@ -95,8 +96,12 @@ export default async function TourPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {tourRows.map((row) => (
-                  <tr key={row.id} className="group transition-colors hover:bg-slate-50">
+                {tourRows.map((row, index) => (
+                  <tr
+                    key={row.id}
+                    className="page-reveal group transition-colors hover:bg-slate-50"
+                    style={{ animationDelay: `${230 + index * 45}ms` }}
+                  >
                     <td className="px-4 py-8">
                       <div className="text-sm font-bold">{formatDate(row.eventDate).toUpperCase()}</div>
                       <div className="text-[11px] tracking-wider text-slate-400 uppercase">{formatDay(row.eventDate)}</div>

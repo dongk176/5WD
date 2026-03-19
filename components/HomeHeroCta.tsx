@@ -21,17 +21,19 @@ export default function HomeHeroCta() {
 
   return (
     <>
-      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+1.25rem)] left-1/2 z-20 flex w-[calc(100%-3rem)] max-w-sm -translate-x-1/2 flex-col items-center gap-3 md:bottom-28 md:w-auto md:max-w-none md:flex-row">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+1.75rem)] left-1/2 z-20 flex w-[calc(100%-3rem)] max-w-sm -translate-x-1/2 flex-col items-center gap-3 md:bottom-28 md:w-auto md:max-w-none md:flex-row">
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="home-reveal home-delay-2 w-full border border-charcoal bg-charcoal px-7 py-3 text-center text-xs font-semibold tracking-[0.24em] text-white uppercase transition hover:bg-transparent hover:text-charcoal md:w-auto"
+          className="hero-cta-enter hero-cta-enter-1 w-full border border-charcoal bg-charcoal px-7 py-3 text-center text-xs font-semibold tracking-[0.24em] text-white uppercase transition hover:bg-transparent hover:text-charcoal md:w-auto"
+          style={{ opacity: 0 }}
         >
           Listen Now
         </button>
         <Link
           href="/contact"
-          className="home-reveal home-delay-3 w-full border border-charcoal bg-white/40 px-7 py-3 text-center text-xs font-semibold tracking-[0.24em] text-charcoal uppercase backdrop-blur-sm transition hover:bg-charcoal hover:text-white md:w-auto"
+          className="hero-cta-enter hero-cta-enter-2 w-full border border-charcoal bg-white/40 px-7 py-3 text-center text-xs font-semibold tracking-[0.24em] text-charcoal uppercase backdrop-blur-sm transition hover:bg-charcoal hover:text-white md:w-auto"
+          style={{ opacity: 0 }}
         >
           Contact
         </Link>

@@ -92,6 +92,9 @@ body {
 
 .home-reveal {
   opacity: 0;
+}
+
+.home-reveal.home-reveal-visible {
   animation: home-reveal-up 0.46s cubic-bezier(0.22, 0.65, 0.2, 1) forwards;
   animation-delay: var(--home-delay, 0ms);
 }
@@ -117,13 +120,124 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-reveal {
+  .home-reveal,
+  .home-reveal.home-reveal-visible {
     opacity: 1;
     animation: none;
     filter: none;
     transform: none;
   }
 }
+
+@keyframes hero-media-cinematic {
+  0% {
+    opacity: 0;
+    transform: scale(1.08) translate3d(0, 1.8%, 0);
+    clip-path: inset(100% 0 0 0);
+  }
+  30% {
+    opacity: 1;
+  }
+  68% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.hero-media-cinematic {
+  opacity: 0;
+  transform: scale(1.08) translate3d(0, 1.8%, 0);
+  clip-path: inset(100% 0 0 0);
+  animation: hero-media-cinematic 1.35s cubic-bezier(0.22, 0.78, 0.2, 1) both;
+  will-change: transform, opacity, clip-path;
+}
+
+@keyframes hero-cta-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-cta-enter {
+  animation: hero-cta-enter 0.45s cubic-bezier(0.22, 0.65, 0.2, 1) forwards;
+  animation-delay: var(--hero-cta-delay, 260ms);
+}
+
+.hero-cta-enter-1 {
+  --hero-cta-delay: 300ms;
+}
+
+.hero-cta-enter-2 {
+  --hero-cta-delay: 380ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media-cinematic,
+  .hero-cta-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes page-reveal-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+.page-reveal {
+  opacity: 0;
+  animation: page-reveal-up 0.56s cubic-bezier(0.22, 0.65, 0.2, 1) forwards;
+  animation-delay: var(--page-reveal-delay, 0ms);
+}
+
+.page-delay-1 {
+  --page-reveal-delay: 60ms;
+}
+
+.page-delay-2 {
+  --page-reveal-delay: 130ms;
+}
+
+.page-delay-3 {
+  --page-reveal-delay: 200ms;
+}
+
+.page-delay-4 {
+  --page-reveal-delay: 270ms;
+}
+
+.page-delay-5 {
+  --page-reveal-delay: 340ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-reveal {
+    opacity: 1;
+    animation: none;
+    transform: none;
+    filter: none;
+  }
+}
+
 
 .editorial-grid {
   display: grid;

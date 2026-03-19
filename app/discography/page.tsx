@@ -30,17 +30,18 @@ export default async function DiscographyPage() {
       <main className="mx-auto w-full max-w-[1440px] flex-1 px-6 pt-28 pb-12 lg:px-20">
         <div className="mx-auto w-full max-w-[1120px]">
           <div className="mb-16 space-y-4">
-            <h2 className="text-5xl font-light tracking-tight">Discography</h2>
+            <h2 className="page-reveal page-delay-1 text-5xl font-light tracking-tight">Discography</h2>
           </div>
 
           <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {releases.map((release) => (
+            {releases.map((release, index) => (
               <a
                 key={release.id}
                 href={release.streamingUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group cursor-pointer"
+                className="page-reveal group cursor-pointer"
+                style={{ animationDelay: `${180 + index * 45}ms` }}
               >
                 <div className="mb-4 aspect-square overflow-hidden">
                   {release.coverUrl ? (
