@@ -54,23 +54,21 @@ export default async function Home() {
     <div className="bg-background-light text-charcoal selection:bg-charcoal selection:text-white">
       <SiteHeader logoAnimation="roll-in" />
 
-      <section className="relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white md:h-screen">
+      <section className="relative flex h-[100svh] min-h-[100svh] w-full items-center justify-center overflow-hidden bg-white md:h-screen md:min-h-screen">
         <div className="absolute inset-0 z-10 bg-white/20" />
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-90 md:hidden"
-          data-alt="Moody cinematic black and white portrait of a musician in shadows"
-          style={{
-            backgroundImage: "url('/home/main-mobile.png')",
-            backgroundPosition: "center 44%",
-          }}
+        <img
+          src="/home/main-mobile.png"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[center_44%] opacity-90 md:hidden"
         />
-        <div
-          className="absolute inset-0 hidden bg-cover bg-center opacity-90 md:block"
-          data-alt="Moody cinematic black and white portrait of a musician in shadows"
-          style={{
-            backgroundImage: "url('/home/main.png')",
-            backgroundPosition: "center 44%",
-          }}
+        <img
+          src="/home/main.png"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="pointer-events-none absolute inset-0 hidden h-full w-full select-none object-cover object-[center_44%] opacity-90 md:block"
         />
         <HomeHeroCta />
         <div className="absolute bottom-3 left-1/2 z-20 hidden -translate-x-1/2 animate-bounce md:bottom-10 md:block">
