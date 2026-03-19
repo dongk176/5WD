@@ -1,10 +1,11 @@
 "use server";
 
-import { AlbumType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { isDirectAssetUrl, uploadFileAsset } from "@/lib/storage";
 import { isYouTubeUrl } from "@/lib/video-utils";
+
+type AlbumTypeValue = "FULL_ALBUM" | "EP" | "SINGLE";
 
 function getStringField(formData: FormData, key: string): string {
   const value = formData.get(key);
@@ -33,10 +34,10 @@ function toDateOnlyUtc(value: string): Date {
   return new Date(`${value}T00:00:00.000Z`);
 }
 
-function getAlbumType(value: string): AlbumType {
-  if (value === AlbumType.EP) return AlbumType.EP;
-  if (value === AlbumType.SINGLE) return AlbumType.SINGLE;
-  return AlbumType.FULL_ALBUM;
+function getAlbumType(value: string): AlbumTypeValue {
+  if (value === "EP") return "EP";
+  if (value === "SINGLE") return "SINGLE";
+  return "FULL_ALBUM";
 }
 
 function getRequestedSortOrder(formData: FormData, key: string): number | null {

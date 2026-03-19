@@ -1,4 +1,3 @@
-import { AlbumType } from "@prisma/client";
 import AdminFileInput from "@/components/AdminFileInput";
 import FormConfirmGuard from "@/components/FormConfirmGuard";
 import SiteHeader from "@/components/SiteHeader";
@@ -33,9 +32,9 @@ function displayDate(date: Date): string {
   return dateInputValue(date).replaceAll("-", ".");
 }
 
-function albumTypeLabel(albumType: AlbumType): string {
-  if (albumType === AlbumType.EP) return "EP";
-  if (albumType === AlbumType.SINGLE) return "SINGLE";
+function albumTypeLabel(albumType: string): string {
+  if (albumType === "EP") return "EP";
+  if (albumType === "SINGLE") return "SINGLE";
   return "FULL ALBUM";
 }
 
@@ -312,12 +311,12 @@ export default async function AdminPage() {
                   />
                   <select
                     name="albumType"
-                    defaultValue={AlbumType.FULL_ALBUM}
+                    defaultValue="FULL_ALBUM"
                     className="rounded border border-slate-200 bg-white px-4 py-3 focus:border-primary focus:outline-none"
                   >
-                    <option value={AlbumType.FULL_ALBUM}>FULL ALBUM</option>
-                    <option value={AlbumType.EP}>EP</option>
-                    <option value={AlbumType.SINGLE}>SINGLE</option>
+                    <option value="FULL_ALBUM">FULL ALBUM</option>
+                    <option value="EP">EP</option>
+                    <option value="SINGLE">SINGLE</option>
                   </select>
                   <input
                     type="number"
@@ -393,9 +392,9 @@ export default async function AdminPage() {
                           defaultValue={release.albumType}
                           className="rounded border border-slate-200 px-4 py-2.5 focus:border-primary focus:outline-none"
                         >
-                          <option value={AlbumType.FULL_ALBUM}>FULL ALBUM</option>
-                          <option value={AlbumType.EP}>EP</option>
-                          <option value={AlbumType.SINGLE}>SINGLE</option>
+                          <option value="FULL_ALBUM">FULL ALBUM</option>
+                          <option value="EP">EP</option>
+                          <option value="SINGLE">SINGLE</option>
                         </select>
                         <input
                           type="number"
